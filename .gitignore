@@ -1,0 +1,23 @@
+# ─── Frontend ───────────────────────────
+FRONTEND/topic-jot/node_modules/
+FRONTEND/topic-jot/dist/
+FRONTEND/topic-jot/.angular/
+
+# ─── Backend (Maven) ────────────────────
+BACKEND/*/target/
+BACKEND/*/*.class
+BACKEND/*/*.jar
+BACKEND/*/*.war
+
+# ─── IDEs ───────────────────────────────
+.vscode/
+.idea/
+*.iml
+
+# ─── OS ─────────────────────────────────
+Thumbs.db
+.DS_Store
+
+# ─── Env ────────────────────────────────
+.env
+.env.local

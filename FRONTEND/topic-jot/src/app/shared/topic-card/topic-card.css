@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+:host {
+    @apply border border-1 border-[#3B2F2F] rounded-md p-2 w-sm max-w-sm max-h-fit block;
+}

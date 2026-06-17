@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-4">
+    <div class="flex flex-wrap justify-center gap-4">
+        @for (item of items; track $index) {
+        <app-topic-card class="cursor-pointer" title="Sample Title" description="Sample Description"
+            (click)="topicSelected.emit()"></app-topic-card>
+        }
+    </div>
+</div>

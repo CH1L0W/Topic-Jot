@@ -1,0 +1,11 @@
+@if (showDialog) {
+<div class="backdrop">
+    <div class="popup">
+        <div class="flex justify-center">
+            <ng-content select="[header]"></ng-content>
+        </div>
+        <ng-content select="[body]"></ng-content>
+        <ng-content select="[footer]"></ng-content>
+    </div>
+</div>
+}

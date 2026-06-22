@@ -1,2 +1,7 @@
-<h3 class="pb-2">{{ title }}</h3>
-<p>{{ description }}</p>
+@if (title) {
+  <h3 class="pb-2">{{ title }}</h3>
+}
+@if (description) {
+  <p>{{ description }}</p>
+}
+<ng-content></ng-content>

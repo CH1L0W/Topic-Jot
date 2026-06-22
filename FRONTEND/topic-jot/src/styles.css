@@ -18,4 +18,8 @@
   h6 {
     font-family: 'Pacifico', cursive !important;
   }
+
+  button {
+    @apply cursor-pointer;
+  }
 }

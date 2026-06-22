@@ -9,6 +9,12 @@ import { TopicCard } from "../../shared/topic-card/topic-card";
 })
 export class Topics {
   @Output() topicSelected = new EventEmitter<void>();
+  @Output() addTopic = new EventEmitter<void>();
 
-  items = Array(3);
+  items = Array(4);
+
+  addTopicClick() {
+    console.log('click addTopic');
+    this.addTopic.emit();
+  }
 }

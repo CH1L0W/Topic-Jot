@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './topic-card.css',
 })
 export class TopicCard {
-  @Input() title: string = 'Title';
-  @Input() description: string = 'Description';
+  @Input() title?: string;
+  @Input() description?: string;
 }

@@ -1,13 +1,5 @@
 @import "tailwindcss";
 
-/* :host {
-    @apply 
-    fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-    flex flex-col gap-4
-    border border-1 border-[#3B2F2F] rounded-md 
-    p-2 w-[30dvw];
-} */
-
 .backdrop {
     @apply
     fixed inset-0 z-50 bg-black/50
@@ -16,7 +8,7 @@
 .popup {
     @apply
     fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-    flex flex-col gap-4
+    flex flex-col gap-2
     border border-1 border-[#3B2F2F] rounded-lg 
-    p-4 w-[30dvw] bg-[#F1E9D2]
+    p-4 w-[30dvw] bg-[#fcf8ec];
 }

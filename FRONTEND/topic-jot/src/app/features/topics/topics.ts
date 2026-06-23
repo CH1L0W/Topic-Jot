@@ -12,9 +12,4 @@ export class Topics {
   @Output() addTopic = new EventEmitter<void>();
 
   items = Array(4);
-
-  addTopicClick() {
-    console.log('click addTopic');
-    this.addTopic.emit();
-  }
 }

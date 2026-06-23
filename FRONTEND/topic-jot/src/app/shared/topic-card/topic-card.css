@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
 :host {
-    @apply border border-1 border-[#3B2F2F] rounded-md p-2 w-sm max-w-sm max-h-fit block;
+    @apply 
+    border border-1 border-[#3B2F2F] rounded-md 
+    p-2 w-sm h-25 max-w-sm 
+    flex flex-col
+    transition
+    cursor-pointer
+    relative
+    shadow-lg
+    bg-[#fcf8ec];
+}
+
+:host:hover {
+    @apply scale-105;
 }

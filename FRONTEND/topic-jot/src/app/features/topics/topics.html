@@ -1,12 +1,19 @@
 <div class="flex flex-col gap-4">
     <div class="flex flex-wrap justify-center gap-4">
         @for (item of items; track $index) {
-        <app-topic-card class="cursor-pointer" title="Sample Title" description="Sample Description"
-            (click)="topicSelected.emit()"></app-topic-card>
+        <app-topic-card title="Sample Title" description="Sample Description" (click)="topicSelected.emit()">
+            <div footer class="flex justify-between items-center">
+                <div class="flex gap-4">
+                    <div class="flex items-center gap-1"><i class="pi pi-pen-to-square"></i> 18 notes</div>
+                    <div class="flex items-center gap-1"><i class="pi pi-clock"></i> 2 days ago</div>
+                </div>
+                <i class="pi pi-star"></i>
+            </div>
+        </app-topic-card>
         }
 
-        <app-topic-card class="cursor-pointer">
-            <div class="flex flex-col gap-4" (click)="addTopicClick()">
+        <app-topic-card>
+            <div class="flex flex-col gap-4" (click)="addTopic.emit()">
                 <h1 class="text-center">Add Topic</h1>
                 <div class="flex items-center justify-center">
                     <i class="pi pi-plus"></i>

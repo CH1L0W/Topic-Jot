@@ -1,1 +1,24 @@
-<p>notes works!</p>
+<div class="flex flex-col gap-4 px-[10%]">
+    @for (item of items; track $index) {
+    <app-note-card class="relative" title="Sample Title">
+        <button class="absolute top-2 right-1.5 text-xl">
+            <i class="pi pi-ellipsis-v"></i>
+        </button>
+        <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian
+            at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text
+            for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic
+            typesetting, remaining essentially unchanged. It was popularised thanks to these sheets and more recently
+            with desktop publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.
+        </p>
+        <div footer class="flex justify-between items-center">
+            <div class="flex gap-4">
+                <div class="flex items-center gap-1"><i class="pi pi-clock"></i> Last updated</div>
+            </div>
+            <button>
+                <i class="pi pi-bookmark"></i>
+            </button>
+        </div>
+    </app-note-card>
+    }
+</div>

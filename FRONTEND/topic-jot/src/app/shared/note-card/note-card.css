@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+:host {
+    @apply 
+    flex flex-col gap-4
+    border border-1 rounded-lg p-2
+    w-full
+    bg-[#fcf8ec];
+}

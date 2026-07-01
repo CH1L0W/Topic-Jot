@@ -1,0 +1,7 @@
+export const USER_ENDPOINTS = {}
+
+export const LOGIN_ENDPOINTS = {}
+
+export const TOPIC_ENDPOINTS = {}
+
+export const NOTE_ENDPOINTS = {}

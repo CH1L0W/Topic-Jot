@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TopicCard } from "../../shared/topic-card/topic-card";
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-topics',
-  imports: [TopicCard],
+  imports: [TopicCard, LucideAngularModule],
   templateUrl: './topics.html',
   styleUrl: './topics.css',
 })

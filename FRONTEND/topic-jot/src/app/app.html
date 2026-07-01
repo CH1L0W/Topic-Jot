@@ -2,7 +2,7 @@
     <div class="relative">
         @if (view() === 'Notes') {
         <button class="back-button" (click)="showTopics()">
-            <i class="!flex items-center justify-center border rounded-full w-8 h-8 pi pi-arrow-left"></i>
+            <lucide-icon name="arrow-left" class="!flex items-center justify-center border rounded-full w-8 h-8" />
             <span class="text-xl">Go Back</span>
         </button>
         }
@@ -29,11 +29,34 @@
     <div body class="flex flex-col gap-2 text-xl mb-4">
         <div class="flex flex-col gap-1">
             <label>Name</label>
-            <input class="border border-1 rounded-md px-1" type="text">
+            <input class="border border-1 rounded-md px-1" type="text" placeholder="e.g. Work, Personal, Ideas...">
         </div>
         <div class="flex flex-col gap-1">
             <label>Description</label>
-            <textarea class="border border-1 rounded-md px-1 resize-none" rows="2"></textarea>
+            <textarea class="border border-1 rounded-md px-1 resize-none" rows="2" placeholder="What is this topic about?"></textarea>
+        </div>
+        <div class="flex flex-row gap-1">
+            <div class="flex-1 flex flex-col gap-1">
+                <label>Color</label>
+                <input class="w-full h-full border border-1 rounded-md px-1" type="color">
+            </div>
+            <div class="relative flex-1 flex flex-col gap-1">
+                <label>Icon</label>
+                <div class="flex justify-between items-center border border-1 rounded-md px-1">
+                    <p>Select an icon</p>
+                    <lucide-icon name="chevron-down"></lucide-icon>
+                </div>
+
+                <div class="absolute top-full left-0 w-full bg-[#fcf8ec] border border-1 rounded-md mt-1 z-10 overflow-hidden">
+                    <div class="flex flex-col gap-2 p-2 mr-1 max-h-40 overflow-y-auto">
+                        @for (topic of TOPICS; track $index) {
+                        <div class="flex flex-row items-center justify-center gap-1 p-2 border border-1 rounded-md cursor-pointer hover:bg-gray-100">
+                            <lucide-icon name="{{ topic.icon }}" size="20" />
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div footer class="flex flex-row gap-2">
@@ -41,23 +64,5 @@
         <button class="border border-1 rounded-md px-1 flex-1">Save</button>
     </div>
 </app-base-dialog>
-
-
-<!-- <p-dialog header="New Topic" [(visible)]="showDialog" [modal]="true" draggable="false" [resizable]="false" closable="false" [style]="{ width: '30dvw', height: '30dvh' }">
-    <div class="flex flex-col gap-4">
-        <div class="flex flex-row gap-2">
-            <label class="flex-1">Name</label>
-            <input class="border border-1 rounded-md" type="text">
-        </div>
-        <div class="flex flex-row gap-2">
-            <label class="flex-1">Description</label>
-            <input class="border border-1 rounded-md" type="text">
-        </div>
-        <div class="flex flex-row gap-2">
-            <button class="border border-1 rounded-md px-1 flex-1">Cancel</button>
-            <button class="border border-1 rounded-md px-1 flex-1">Save</button>
-        </div>
-    </div>
-</p-dialog> -->
 
 <router-outlet />

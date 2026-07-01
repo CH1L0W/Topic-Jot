@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { LucideAngularModule } from "lucide-angular";
 
 @Component({
   selector: 'app-topic-card',
-  imports: [],
+  imports: [LucideAngularModule],
   templateUrl: './topic-card.html',
   styleUrl: './topic-card.css',
 })

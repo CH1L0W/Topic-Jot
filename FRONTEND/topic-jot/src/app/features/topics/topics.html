@@ -4,10 +4,10 @@
         <app-topic-card title="Sample Title" description="Sample Description" (click)="topicSelected.emit()">
             <div footer class="flex justify-between items-center">
                 <div class="flex gap-4">
-                    <div class="flex items-center gap-1"><i class="pi pi-pen-to-square"></i> 18 notes</div>
-                    <div class="flex items-center gap-1"><i class="pi pi-clock"></i> 2 days ago</div>
+                    <div class="flex items-center gap-1"><lucide-icon name="notepad-text" size="20" /> 18 notes</div>
+                    <div class="flex items-center gap-1"><lucide-icon name="clock" size="20" /> 2 days ago</div>
                 </div>
-                <i class="pi pi-star"></i>
+                <lucide-icon name="star" size="20" />
             </div>
         </app-topic-card>
         }
@@ -16,7 +16,7 @@
             <div class="flex flex-col gap-4" (click)="addTopic.emit()">
                 <h1 class="text-center">Add Topic</h1>
                 <div class="flex items-center justify-center">
-                    <i class="pi pi-plus"></i>
+                    <lucide-icon name="plus" />
                 </div>
             </div>
         </app-topic-card>

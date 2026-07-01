@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NoteCard } from "../../shared/note-card/note-card";
+import { LucideAngularModule } from "lucide-angular";
 
 @Component({
   selector: 'app-notes',
-  imports: [NoteCard],
+  imports: [NoteCard, LucideAngularModule],
   templateUrl: './notes.html',
   styleUrl: './notes.css',
 })

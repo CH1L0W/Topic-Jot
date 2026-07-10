@@ -2,14 +2,14 @@
 
 :host {
     @apply 
-    border border-1 border-[#3B2F2F] rounded-md 
-    p-2 w-sm h-25 max-w-sm 
+    border border-1 
+    p-2 w-sm min-h-25 max-w-sm 
     flex flex-col
     transition
     cursor-pointer
     relative
-    shadow-lg
-    bg-[#fcf8ec];
+    bg-[#FCFAF7]
+    shadow-lg;
 }
 
 :host:hover {

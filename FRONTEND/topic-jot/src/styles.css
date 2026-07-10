@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 @layer base {
-  *:not(i) {
-    font-family: 'Caveat', cursive !important;
+  * {
+    font-family: 'Inter', sans-serif;
+    @apply border-[#D7BDA6] rounded-md;
   }
 
   body {
-    @apply bg-[#F1E9D2] text-[#3B2F2F] h-full w-full;
+    @apply bg-[#F7F1EA] text-[#6D3914] h-full w-full text-sm;
   }
 
   h1,
@@ -15,11 +16,18 @@
   h4,
   h5,
   h6 {
-    font-family: 'Pacifico', cursive !important;
+    font-family: 'DM Sans', sans-serif;
+    @apply !font-bold !text-[#4C2B08];
   }
 
-  button {
+  button,
+  select,
+  .select {
     @apply cursor-pointer;
+  }
+
+  input {
+    @apply !rounded-md;
   }
 
   ::-webkit-scrollbar {
@@ -39,4 +47,14 @@
     background: #3B2F2F;
     border-radius: 999px;
   }
+}
+
+@theme {
+  --color-bg: #F7F1EA;
+  --color-text: #6D3914;
+  --color-title: #4C2B08;
+  --color-border: #D7BDA6;
+  --color-card-bg: #FCFAF7;
+  --color-toolbar-bg: #F0E3D4;
+  --color-form-element-bg: #F0E3D4;
 }

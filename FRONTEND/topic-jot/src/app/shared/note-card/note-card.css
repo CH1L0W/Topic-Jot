@@ -3,7 +3,7 @@
 :host {
     @apply 
     flex flex-col gap-4
-    border border-1 rounded-lg p-2
-    w-full
-    bg-[#fcf8ec];
+    border border-1 !border-[#DCCDBE] p-2
+    bg-[#FCFAF7]
+    w-full;
 }

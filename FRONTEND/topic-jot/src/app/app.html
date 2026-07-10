@@ -1,15 +1,13 @@
 <div class="flex flex-col gap-4">
     <div class="relative">
         @if (view() === 'Notes') {
-        <button class="back-button" (click)="showTopics()">
-            <lucide-icon name="arrow-left" class="!flex items-center justify-center border rounded-full w-8 h-8" />
-            <span class="text-xl">Go Back</span>
+        <button class="back-button flex items-center gap-2" (click)="showTopics()">
+            <lucide-icon name="arrow-left" size="20" class="!flex items-center justify-center" />
+            <span>Go Back</span>
         </button>
         }
-        <h1 class="text-4xl font-bold text-center">Topic Jot</h1>
+        <h1 class="!text-4xl font-bold text-center" style="font-family: 'Pacifico', cursive;">Topic Jot</h1>
     </div>
-
-    <app-search-bar></app-search-bar>
 
     @switch (view()) {
     @case('Topics'){
@@ -24,44 +22,49 @@
 
 <app-base-dialog [showDialog]="showDialog()">
     <div header>
-        <h2 class="text-3xl font-bold">New Topic</h2>
+        <h2 class="text-3xl">New Topic</h2>
     </div>
-    <div body class="flex flex-col gap-2 text-xl mb-4">
+    <div body class="flex flex-col gap-2 text-base mb-4">
         <div class="flex flex-col gap-1">
             <label>Name</label>
-            <input class="border border-1 rounded-md px-1" type="text" placeholder="e.g. Work, Personal, Ideas...">
+            <input class="border border-1 px-1" type="text" placeholder="e.g. Work, Personal, Ideas...">
         </div>
         <div class="flex flex-col gap-1">
             <label>Description</label>
-            <textarea class="border border-1 rounded-md px-1 resize-none" rows="2" placeholder="What is this topic about?"></textarea>
+            <textarea class="border border-1 px-1 resize-none" rows="2"
+                placeholder="What is this topic about?"></textarea>
         </div>
         <div class="flex flex-row gap-1">
             <div class="flex-1 flex flex-col gap-1">
                 <label>Color</label>
-                <input class="w-full h-full border border-1 rounded-md px-1" type="color">
+                <input class="w-full h-full border border-1 px-1" type="color">
             </div>
             <div class="relative flex-1 flex flex-col gap-1">
                 <label>Icon</label>
-                <div class="flex justify-between items-center border border-1 rounded-md px-1">
+                <div class="flex justify-between items-center border border-1 px-1" (click)="showIconDropdown.set(!showIconDropdown())">
                     <p>Select an icon</p>
                     <lucide-icon name="chevron-down"></lucide-icon>
                 </div>
 
-                <div class="absolute top-full left-0 w-full bg-[#fcf8ec] border border-1 rounded-md mt-1 z-10 overflow-hidden">
+                @if (showIconDropdown()) {
+                <div
+                    class="absolute top-full left-0 w-full border border-1 mt-1 z-10 overflow-hidden">
                     <div class="flex flex-col gap-2 p-2 mr-1 max-h-40 overflow-y-auto">
                         @for (topic of TOPICS; track $index) {
-                        <div class="flex flex-row items-center justify-center gap-1 p-2 border border-1 rounded-md cursor-pointer hover:bg-gray-100">
+                        <div
+                            class="flex flex-row items-center justify-center gap-1 p-2 border border-1 cursor-pointer bg-white hover:bg-gray-200">
                             <lucide-icon name="{{ topic.icon }}" size="20" />
                         </div>
                         }
                     </div>
                 </div>
+                }
             </div>
         </div>
     </div>
-    <div footer class="flex flex-row gap-2">
-        <button class="border border-1 rounded-md px-1 flex-1" (click)="showDialog.set(false)">Cancel</button>
-        <button class="border border-1 rounded-md px-1 flex-1">Save</button>
+    <div footer class="flex flex-row gap-2 text-base">
+        <button class="border border-1 px-1 flex-1" (click)="showDialog.set(false)">Cancel</button>
+        <button class="border border-1 px-1 flex-1">Save</button>
     </div>
 </app-base-dialog>
 

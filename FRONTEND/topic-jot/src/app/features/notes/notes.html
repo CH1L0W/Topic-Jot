@@ -1,10 +1,31 @@
-<div class="flex flex-col gap-4 px-[10%]">
+<div class="toolbar">
+    <div class="flex flex-row items-center gap-2">
+        <app-search-bar></app-search-bar>
+        <span>|</span>
+        <div class="filters">
+            <lucide-icon name="funnel" size="20"></lucide-icon>
+            <span>Filters</span>
+            <lucide-icon name="chevron-down" size="20"></lucide-icon>
+        </div>
+    </div>
+
+    <div class="flex flex-row items-center gap-2">
+        <span># Notes</span>
+        <span>|</span>
+        <div class="options">
+            <lucide-icon name="ellipsis-vertical" size="20"></lucide-icon>
+        </div>
+    </div>
+</div>
+
+<div class="flex flex-col gap-4">
     @for (item of items; track $index) {
     <app-note-card class="relative" title="Sample Title">
         <button class="absolute top-2 right-1.5 text-xl">
-            <lucide-icon name="ellipsis-vertical"/>
+            <lucide-icon name="ellipsis-vertical" />
         </button>
-        <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+        <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+            has been the
             industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian
             at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text
             for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic
@@ -13,10 +34,10 @@
         </p>
         <div footer class="flex justify-between items-center">
             <div class="flex gap-4">
-                <div class="flex items-center gap-1"><lucide-icon name="clock" size="20"/> Last updated</div>
+                <div class="flex items-center gap-1"><lucide-icon name="clock" size="20" /> Last updated</div>
             </div>
             <button>
-                <lucide-icon name="bookmark" size="20"/>
+                <lucide-icon name="bookmark" size="20" />
             </button>
         </div>
     </app-note-card>

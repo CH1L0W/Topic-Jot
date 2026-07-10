@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:host {
+    @apply px-[10%];
+}
+
+.toolbar {
+    @apply flex flex-row justify-between items-center mb-4 p-2 
+    border-1 shadow-md 
+    bg-[#FCFAF7];
+
+    .filters{
+       @apply flex flex-row items-center p-1 gap-1 
+       w-fit 
+       border-1 
+       cursor-pointer;
+    }
+
+    .options{
+        @apply flex items-center p-1 gap-1 
+        border-1 
+        cursor-pointer;
+    }
+}

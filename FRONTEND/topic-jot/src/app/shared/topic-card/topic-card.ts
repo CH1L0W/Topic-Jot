@@ -10,4 +10,6 @@ import { LucideAngularModule } from "lucide-angular";
 export class TopicCard {
   @Input() title?: string;
   @Input() description?: string;
+  @Input() color?: string = "#ffffff";
+  @Input() icon?: string;
 }

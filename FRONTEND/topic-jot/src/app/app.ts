@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SearchBar } from "./layout/search-bar/search-bar";
 import { Topics } from "./features/topics/topics";
 import { Notes } from './features/notes/notes';
 import { DialogModule } from 'primeng/dialog';
@@ -10,7 +9,7 @@ import { TOPICS } from './core/constants/topics';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SearchBar, Topics, Notes, DialogModule, BaseDialog, LucideAngularModule],
+  imports: [RouterOutlet, Topics, Notes, DialogModule, BaseDialog, LucideAngularModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -19,6 +18,7 @@ export class App {
 
   view = signal<'Topics' | 'Notes'>('Topics');
   showDialog = signal(false);
+  showIconDropdown = signal(false);
 
   showNotes() {
     this.view.set('Notes');

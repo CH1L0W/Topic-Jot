@@ -1,11 +1,12 @@
 package com.dev.topicjot.controllers;
 
 import com.dev.topicjot.dto.TopicDTO;
-import com.dev.topicjot.models.Topic;
+import com.dev.topicjot.models.User;
 import com.dev.topicjot.services.TopicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +17,9 @@ import java.util.List;
 public class TopicController {
     private final TopicService topicService;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<TopicDTO>> getAllTopics(@PathVariable Long userId) {
-        return ResponseEntity.ok(this.topicService.getTopics(userId));
+    @GetMapping()
+    public ResponseEntity<List<TopicDTO>> getAllTopics(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(this.topicService.getTopics(user.getId()));
     }
 
     @PostMapping

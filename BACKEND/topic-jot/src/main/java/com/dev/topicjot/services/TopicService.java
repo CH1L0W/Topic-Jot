@@ -27,7 +27,7 @@ public class TopicService {
 
     public void updateTopic(Long id, TopicDTO topicDTO) {
         this.topicRepository.findById(id).ifPresent(existingTopic -> {
-            existingTopic.setName(topicDTO.getName());
+            existingTopic.setTitle(topicDTO.getTitle());
             existingTopic.setUser(userRepository.findById(topicDTO.getUserId()).orElseThrow(() -> new RuntimeException("user not found")));
             this.topicRepository.save(existingTopic);
         });

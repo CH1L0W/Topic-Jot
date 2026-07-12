@@ -14,4 +14,8 @@
         @apply flex flex-row gap-1 justify-center items-center px-3 py-1 
         hover:bg-[#3B2F2F] hover:text-[#FCFAF7] hover:rounded-full opacity-100 transition-all duration-300;
     }
+
+    .active-button {
+        @apply bg-[#3B2F2F] text-[#FCFAF7] rounded-full;
+    }
 }

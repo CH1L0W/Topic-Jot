@@ -3,19 +3,23 @@
 </div>
 
 <div class="filters">
-    <button class="filter-button" (click)="setTopicsFilter('All')">
+    <button class="filter-button" [class.active-button]="filter() === filtersList.all"
+        (click)="setTopicsFilter(filtersList.all)">
         <lucide-icon name="layout-grid" size="20"></lucide-icon>
         All
     </button>
-    <button class="filter-button" (click)="setTopicsFilter('Favorites')">
+    <button class="filter-button" [class.active-button]="filter() === filtersList.favorites"
+        (click)="setTopicsFilter(filtersList.favorites)">
         <lucide-icon name="star" size="20"></lucide-icon>
         Favorites
     </button>
-    <button class="filter-button" (click)="setTopicsFilter('Recent')">
+    <button class="filter-button" [class.active-button]="filter() === filtersList.recent"
+        (click)="setTopicsFilter(filtersList.recent)">
         <lucide-icon name="clock" size="20"></lucide-icon>
         Recent
     </button>
-    <button class="filter-button" (click)="setTopicsFilter('Archived')">
+    <button class="filter-button" [class.active-button]="filter() === filtersList.archived"
+        (click)="setTopicsFilter(filtersList.archived)">
         <lucide-icon name="archive" size="20"></lucide-icon>
         Archived
     </button>
@@ -23,16 +27,9 @@
 
 <div class="flex flex-col gap-4">
     <div class="flex flex-wrap justify-center gap-4">
-        @for (item of items; track $index) {
-        <app-topic-card title="Sample Title" description="Sample Description" (click)="topicSelected.emit()">
-            <div footer class="flex justify-between items-center">
-                <div class="flex gap-2">
-                    <div class="flex items-center gap-1"><lucide-icon name="notepad-text" size="20" /> 18 notes</div>
-                    <span>•</span>
-                    <div class="flex items-center gap-1"><lucide-icon name="clock" size="20" /> 2 days ago</div>
-                </div>
-                <lucide-icon name="star" size="20" />
-            </div>
+
+        @for (item of topics(); track $index) {
+        <app-topic-card [topic]="item" (click)="topicSelected.emit()">
         </app-topic-card>
         }
 

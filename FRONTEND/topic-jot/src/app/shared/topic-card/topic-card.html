@@ -1,22 +1,39 @@
-@if (title) {
+@if (topic) {
 <div class="flex flex-col gap-1 justify-between h-full">
   <div class="flex flex-1 flex-row gap-1">
-    <div class="h-20 w-20 m-1" [style.background-color]="color">
-      
+    @if (topic.icon) {
+    <div class="flex justify-center items-center h-20 w-20" [style.background-color]="topic.cardColor">
+      <lucide-icon [name]="topic.icon | topicIcon" [color]="topic.cardColor | contrastColor" size="50" />
     </div>
-    
+    }
+
     <div>
-      <h3>{{ title }}</h3>
-      <p>{{ description }}</p>
+      <h3>{{ topic.title }}</h3>
+      <p>{{ topic.description }}</p>
     </div>
 
     <button class="absolute top-2 right-1">
       <lucide-icon name="ellipsis-vertical" />
     </button>
+
+    <div class="border-1 absolute top-8 right-1 w-fit py-1 px-2 bg-white rounded-md shadow-lg z-10">
+      <ul>
+        <li class="px-1 py-1 hover:bg-gray-100 cursor-pointer">Edit</li>
+        <li class="px-1 py-1 hover:bg-gray-100 cursor-pointer">Delete</li>
+      </ul>
+    </div>
   </div>
 
   <div class="mt-auto">
-    <ng-content select="[footer]"></ng-content>
+    <div class="flex justify-between items-center">
+      <div class="flex gap-2">
+        <div class="flex items-center gap-1"><lucide-icon name="notepad-text" size="20" /> {{topic.notes}} notes</div>
+        <span>•</span>
+        <div class="flex items-center gap-1"><lucide-icon name="clock" size="20" /> {{topic.lastTimeOpened | timeAgo}}
+        </div>
+      </div>
+      <lucide-icon name="star" size="20" [class]="topic.favorite ? 'fill-current' : ''" />
+    </div>
   </div>
 </div>
 }

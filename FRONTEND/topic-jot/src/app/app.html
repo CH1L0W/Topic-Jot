@@ -50,7 +50,7 @@
                 <div
                     class="absolute top-full left-0 w-full border border-1 mt-1 z-10 overflow-hidden">
                     <div class="flex flex-col gap-2 p-2 mr-1 max-h-40 overflow-y-auto">
-                        @for (topic of TOPICS; track $index) {
+                        @for (topic of TOPIC_ICONS; track $index) {
                         <div
                             class="flex flex-row items-center justify-center gap-1 p-2 border border-1 cursor-pointer bg-white hover:bg-gray-200">
                             <lucide-icon name="{{ topic.icon }}" size="20" />

@@ -1,7 +1,15 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, computed, EventEmitter, inject, Output, signal } from '@angular/core';
 import { TopicCard } from "../../shared/topic-card/topic-card";
 import { LucideAngularModule } from 'lucide-angular';
 import { SearchBar } from "../../layout/search-bar/search-bar";
+import { TopicStateService } from '../../core/services/topic-state.service';
+
+export enum FILTERS {
+  all = 'ALL',
+  favorites = 'FAVORITES',
+  recent = 'RECENT',
+  archived = 'ARCHIVED'
+}
 
 @Component({
   selector: 'app-topics',
@@ -10,14 +18,19 @@ import { SearchBar } from "../../layout/search-bar/search-bar";
   styleUrl: './topics.css',
 })
 export class Topics {
+  private readonly topicsState = inject(TopicStateService);
+
   @Output() topicSelected = new EventEmitter<void>();
   @Output() addTopic = new EventEmitter<void>();
 
-  filter = signal<'All' | 'Favorites' | 'Recent' | 'Archived'>('All');
+  readonly filtersList = FILTERS;
+  items = Array(1);
 
-  items = Array(4);
+  filter = signal<FILTERS>(FILTERS.all);
 
-  setTopicsFilter(filter: 'All' | 'Favorites' | 'Recent' | 'Archived') {
+  readonly topics = computed(() => this.topicsState.getTopics)
+
+  setTopicsFilter(filter: FILTERS) {
     this.filter.set(filter);
   }
 }

@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
     providedIn: 'root',
 })
 export class ConfigService {
-    private httpClient = inject(HttpClient);
+    private readonly httpClient = inject(HttpClient);
 
     private config: any = {};
 

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -19,10 +21,10 @@ public class LoginController {
     private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody UserDTO userDTO) {
         User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
         if (user != null) {
-            return ResponseEntity.ok(jwtService.generateToken(user.getEmail()));
+            return ResponseEntity.ok(Map.of("token", jwtService.generateToken(user.getEmail())));
         }
         return ResponseEntity.notFound().build();
     }

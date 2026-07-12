@@ -1,4 +1,4 @@
-export const TOPICS = [
+export const TOPIC_ICONS = [
   { name: 'Tech', icon: 'code' },
   { name: 'Education', icon: 'graduation-cap' },
   { name: 'Finance', icon: 'banknote' },

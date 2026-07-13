@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@reference "../../../styles.css";
 
 :host {
     @apply 
     flex flex-col gap-4
     border border-1 p-2
-    bg-[#FCFAF7]
+    bg-card-bg
     w-full;
 }

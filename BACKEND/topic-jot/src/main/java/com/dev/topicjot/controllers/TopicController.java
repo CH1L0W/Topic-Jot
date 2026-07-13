@@ -23,14 +23,14 @@ public class TopicController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createTopic(@RequestBody TopicDTO topic) {
-        this.topicService.addTopic(topic);
+    public ResponseEntity<Void> createTopic(@RequestBody TopicDTO topic, @AuthenticationPrincipal User user) {
+        this.topicService.addTopic(topic, user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateTopic(@PathVariable Long id, @RequestBody TopicDTO topic) {
-        this.topicService.updateTopic(id, topic);
+    public ResponseEntity<Void> updateTopic(@PathVariable Long id, @RequestBody TopicDTO topic, @AuthenticationPrincipal User user) {
+        this.topicService.updateTopic(id, topic, user.getId());
         return ResponseEntity.ok().build();
     }
 

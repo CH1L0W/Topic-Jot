@@ -3,11 +3,11 @@
 @layer base {
   * {
     font-family: 'Inter', sans-serif;
-    @apply border-[#D7BDA6] rounded-md;
+    @apply border-border rounded-md;
   }
 
   body {
-    @apply bg-[#F7F1EA] text-[#6D3914] h-full w-full text-sm;
+    @apply bg-bg text-text h-full w-full text-sm;
   }
 
   h1,
@@ -17,7 +17,7 @@
   h5,
   h6 {
     font-family: 'DM Sans', sans-serif;
-    @apply !font-bold !text-[#4C2B08];
+    @apply !font-bold !text-title;
   }
 
   button,
@@ -26,8 +26,8 @@
     @apply cursor-pointer;
   }
 
-  input {
-    @apply !rounded-md;
+  input, textarea, button {
+    @apply rounded-md;
   }
 
   ::-webkit-scrollbar {

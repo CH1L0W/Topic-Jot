@@ -1,11 +1,11 @@
 export interface Topic {
-    id: string;
+    id?: string;
     title: string;
     description: string;
     cardColor: string;
     icon: string;
     favorite: boolean;
     erased: boolean;
-    lastTimeOpened: Date;
-    notes: number;
+    lastTimeOpened?: Date;
+    notes?: number;
 }

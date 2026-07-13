@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@reference "../styles.css";
 
 :host {
     @apply px-10 py-4 block;
@@ -6,4 +6,10 @@
 
 .back-button {
     @apply flex flex-row gap-1 absolute top-1/2 -translate-y-1/2 opacity-50 cursor-pointer;
+}
+
+app-base-dialog {
+    input, textarea, select, .select, button {
+        @apply bg-bg;
+    }
 }

@@ -12,7 +12,6 @@ import java.time.Instant;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TopicDTO {
     private Long id;
-    private Long userId;
     private String title;
     private String description;
     private String cardColor;

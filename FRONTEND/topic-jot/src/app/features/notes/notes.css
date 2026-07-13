@@ -1,24 +1,23 @@
-@import "tailwindcss";
+@reference "../../../styles.css";
 
 :host {
     @apply px-[10%];
 }
 
 .toolbar {
-    @apply flex flex-row justify-between items-center mb-4 p-2 
-    border-1 shadow-md 
-    bg-[#FCFAF7];
+    @apply flex flex-row justify-between items-center py-2;
 
-    .filters{
-       @apply flex flex-row items-center p-1 gap-1 
-       w-fit 
-       border-1 
-       cursor-pointer;
+    app-search-bar,
+    .filters,
+    .options {
+        @apply !border-1 !border-text bg-card-bg;
     }
 
-    .options{
-        @apply flex items-center p-1 gap-1 
-        border-1 
-        cursor-pointer;
+    .filters {
+        @apply flex flex-row items-center p-1 gap-1 w-fit border-1 cursor-pointer;
+    }
+
+    .options {
+        @apply flex items-center p-1 gap-1 border-1 cursor-pointer;
     }
 }

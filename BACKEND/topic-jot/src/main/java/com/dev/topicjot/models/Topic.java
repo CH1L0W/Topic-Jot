@@ -47,5 +47,11 @@ public class Topic {
 
     public Topic(TopicDTO topicDTO) {
         this.title = topicDTO.getTitle();
+        this.description = topicDTO.getDescription();
+        this.cardColor = topicDTO.getCardColor();
+        this.icon = topicDTO.getIcon();
+        this.favorite = topicDTO.isFavorite();
+        this.erased = topicDTO.isErased();
+        this.lastTimeOpened = Instant.now();
     }
 }

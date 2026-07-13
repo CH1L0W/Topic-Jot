@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center">
-    <app-search-bar class="w-1/3 bg-[#FCFAF7]"></app-search-bar>
+    <app-search-bar class="w-1/3 bg-toolbar-bg"></app-search-bar>
 </div>
 
 <div class="filters">
@@ -33,7 +33,7 @@
         </app-topic-card>
         }
 
-        <app-topic-card (click)="addTopic.emit()">
+        <app-topic-card (click)="dialogState.openTopicDialog()">
             <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-center rounded-full w-12 h-12 mx-auto">
                     <lucide-icon name="plus" />

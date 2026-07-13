@@ -11,7 +11,7 @@
 
     @switch (view()) {
     @case('Topics'){
-    <app-topics (topicSelected)="showNotes()" (addTopic)="showDialog.set(true)"></app-topics>
+    <app-topics (topicSelected)="showNotes()"></app-topics>
     }
 
     @case('Notes'){
@@ -20,40 +20,40 @@
     }
 </div>
 
-<app-base-dialog [showDialog]="showDialog()">
-    <div header>
+<app-base-dialog [showDialog]="dialogState.showTopicDialog()">
+    <header header>
         <h2 class="text-3xl">New Topic</h2>
-    </div>
-    <div body class="flex flex-col gap-2 text-base mb-4">
+    </header>
+    <main body class="flex flex-col gap-2 text-base mb-4">
         <div class="flex flex-col gap-1">
             <label>Name</label>
-            <input class="border border-1 px-1" type="text" placeholder="e.g. Work, Personal, Ideas...">
+            <input class="border border-1 px-1" type="text" placeholder="e.g. Work, Personal, Ideas..." [(ngModel)]="dialogState.topic().title" />
         </div>
         <div class="flex flex-col gap-1">
             <label>Description</label>
             <textarea class="border border-1 px-1 resize-none" rows="2"
-                placeholder="What is this topic about?"></textarea>
+                placeholder="What is this topic about?" [(ngModel)]="dialogState.topic().description"></textarea>
         </div>
         <div class="flex flex-row gap-1">
             <div class="flex-1 flex flex-col gap-1">
                 <label>Color</label>
-                <input class="w-full h-full border border-1 px-1" type="color">
+                <input class="w-full h-full border border-1 px-1" type="color" [(ngModel)]="dialogState.topic().cardColor" />
             </div>
             <div class="relative flex-1 flex flex-col gap-1">
                 <label>Icon</label>
-                <div class="flex justify-between items-center border border-1 px-1" (click)="showIconDropdown.set(!showIconDropdown())">
-                    <p>Select an icon</p>
+                <div class="select flex justify-between items-center border border-1 px-1"
+                    (click)="showIconDropdown.set(!showIconDropdown())">
+                    <p>{{ dialogState.topic().icon || 'Select an icon' }}</p>
                     <lucide-icon name="chevron-down"></lucide-icon>
                 </div>
 
                 @if (showIconDropdown()) {
-                <div
-                    class="absolute top-full left-0 w-full border border-1 mt-1 z-10 overflow-hidden">
-                    <div class="flex flex-col gap-2 p-2 mr-1 max-h-40 overflow-y-auto">
-                        @for (topic of TOPIC_ICONS; track $index) {
+                <div class="absolute top-full left-0 w-full border border-1 mt-1 z-10 overflow-hidden">
+                    <div class="flex flex-col gap-2 p-2 mr-1 max-h-40 overflow-y-auto bg-bg">
+                        @for (t of TOPIC_ICONS; track $index) {
                         <div
-                            class="flex flex-row items-center justify-center gap-1 p-2 border border-1 cursor-pointer bg-white hover:bg-gray-200">
-                            <lucide-icon name="{{ topic.icon }}" size="20" />
+                            class="flex flex-row items-center justify-center gap-1 p-2 border border-1 cursor-pointer bg-white hover:bg-gray-200" (click)="dialogState.topic().icon = t.icon; showIconDropdown.set(false)">
+                            <lucide-icon name="{{ t.icon }}" size="20" />
                         </div>
                         }
                     </div>
@@ -61,11 +61,11 @@
                 }
             </div>
         </div>
-    </div>
-    <div footer class="flex flex-row gap-2 text-base">
-        <button class="border border-1 px-1 flex-1" (click)="showDialog.set(false)">Cancel</button>
-        <button class="border border-1 px-1 flex-1">Save</button>
-    </div>
+    </main>
+    <footer footer class="flex flex-row gap-2 text-base">
+        <button class="border border-1 px-1 flex-1" (click)="dialogState.closeTopicDialog()">Cancel</button>
+        <button class="border border-1 px-1 flex-1" (click)="saveTopic(dialogState.topic())">Save</button>
+    </footer>
 </app-base-dialog>
 
 <router-outlet />

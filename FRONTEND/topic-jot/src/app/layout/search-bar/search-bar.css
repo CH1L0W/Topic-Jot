@@ -1,1 +1,5 @@
-@import "tailwindcss";
+@reference "../../../styles.css";
+
+:host {
+    @apply border border-1;
+}

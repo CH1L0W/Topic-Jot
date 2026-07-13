@@ -1,16 +1,26 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { Topic } from '../models/topic';
+import { ApiService } from './api.service';
+import { TOPIC_ENDPOINTS } from '../constants/endpoints';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TopicStateService {
-  topics = signal<any[]>([]);
+  private readonly api = inject(ApiService);
+  topics = signal<Topic[]>([]);
 
-  set setTopics(topics: any[]) {
-    this.topics.set(topics);
+  getTopics() {
+    this.api.get<Topic[]>(TOPIC_ENDPOINTS.getTopics).subscribe({
+      next: (res) => this.topics.set(res),
+      error: (err) => console.error(err),
+    });
   }
 
-  get getTopics(): any[] {
-    return this.topics();
+  eraseTopic(id: string) {
+    this.api.delete<any>(`${TOPIC_ENDPOINTS.deleteTopic}/${id}`).subscribe({
+      next: () => this.getTopics(),
+      error: (err) => console.error(err),
+    });
   }
 }

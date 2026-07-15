@@ -13,7 +13,8 @@ export const TOPIC_ENDPOINTS = {
     'addTopic': 'topic',
     'getTopics': 'topic',
     'updateTopic': 'topic',
-    'deleteTopic': 'topic'
+    'deleteTopic': 'topic',
+    'toggleFavorite': 'topic/favorite'
 }
 
 export const NOTE_ENDPOINTS = {

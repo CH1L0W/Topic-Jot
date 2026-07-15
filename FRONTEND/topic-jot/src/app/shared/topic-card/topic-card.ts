@@ -1,12 +1,14 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { LucideAngularModule } from "lucide-angular";
+import { ApiService } from '../../core/services/api.service';
 import { Topic } from '../../core/models/topic';
-import { TOPIC_ICONS } from '../../core/constants/topic-icons';
 import { TopicIconPipe } from '../../core/pipes/topic-icon.pipe';
 import { ContrastColorPipe } from '../../core/pipes/contrast-color.pipe';
 import { TimeAgoPipe } from '../../core/pipes/time-ago.pipe';
 import { DialogStateService } from '../../core/services/dialog-state.service';
 import { TopicStateService } from '../../core/services/topic-state.service';
+import { TOPIC_ENDPOINTS } from '../../core/constants/endpoints';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-topic-card',
@@ -15,7 +17,7 @@ import { TopicStateService } from '../../core/services/topic-state.service';
   styleUrl: './topic-card.css',
 })
 export class TopicCard {
-  protected readonly dialogState = inject(DialogStateService);
+  readonly dialogState = inject(DialogStateService);
   private readonly topicsState = inject(TopicStateService);
 
   @Input() topic?: Topic;
@@ -36,5 +38,9 @@ export class TopicCard {
     }
 
     this.hideOptions.set(true);
+  }
+
+  toggleFavorite(id: string) {
+    this.topicsState.toggleFavorite((id));
   }
 }

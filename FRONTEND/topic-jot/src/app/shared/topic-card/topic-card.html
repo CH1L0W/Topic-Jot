@@ -32,7 +32,7 @@
         <div class="flex items-center gap-1"><lucide-icon name="clock" size="20" /> {{topic.lastTimeOpened | timeAgo}}
         </div>
       </div>
-      <lucide-icon name="star" size="20" [class]="topic.favorite ? 'fill-current' : ''" />
+      <lucide-icon name="star" size="20" [class]="topic.favorite ? 'fill-current' : ''" (click)="toggleFavorite(topic.id!); $event.stopPropagation()" />
     </div>
   </div>
 </div>

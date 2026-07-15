@@ -1,5 +1,4 @@
 export const TOPIC_ICONS = [
-  { name: 'Default', icon: 'sticky-note' },
   { name: 'Tech', icon: 'code' },
   { name: 'Education', icon: 'graduation-cap' },
   { name: 'Finance', icon: 'banknote' },

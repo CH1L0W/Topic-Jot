@@ -12,7 +12,6 @@ import { TopicStateService } from './core/services/topic-state.service';
 import { LOGIN_ENDPOINTS, TOPIC_ENDPOINTS } from './core/constants/endpoints';
 import { Topic } from './core/models/topic';
 import { DialogStateService } from './core/services/dialog-state.service';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +24,7 @@ export class App {
   private readonly api = inject(ApiService);
   private readonly topicsState = inject(TopicStateService);
 
-  protected readonly TOPIC_ICONS = TOPIC_ICONS;
+  readonly TOPIC_ICONS = TOPIC_ICONS;
 
   view = signal<'Topics' | 'Notes'>('Topics');
   showDialog = signal(false);

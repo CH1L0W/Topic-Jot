@@ -52,7 +52,7 @@
                     <div class="flex flex-col gap-2 p-2 mr-1 max-h-40 overflow-y-auto bg-bg">
                         @for (t of TOPIC_ICONS; track $index) {
                         <div
-                            class="flex flex-row items-center justify-center gap-1 p-2 border border-1 cursor-pointer bg-white hover:bg-gray-200" (click)="dialogState.topic().icon = t.icon; showIconDropdown.set(false)">
+                            class="flex flex-row items-center justify-center gap-1 p-2 border border-1 cursor-pointer bg-white hover:bg-gray-200" (click)="dialogState.topic().icon = t.name; showIconDropdown.set(false)">
                             <lucide-icon name="{{ t.icon }}" size="20" />
                         </div>
                         }

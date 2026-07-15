@@ -26,13 +26,27 @@ export class Topics {
   @Output() topicSelected = new EventEmitter<void>();
 
   readonly filtersList = FILTERS;
-  items = Array(1);
 
   filter = signal<FILTERS>(FILTERS.all);
 
   readonly topics = computed(() => this.topicsState.topics())
 
   setTopicsFilter(filter: FILTERS) {
+    switch (filter) {
+      case FILTERS.all:
+        this.topicsState.getTopics();
+        break;
+      case FILTERS.favorites:
+        this.topicsState.getTopics('favorite', true);
+        break;
+      case FILTERS.recent:
+        this.topicsState.getTopics('recent', true);
+        break;
+      case FILTERS.archived:
+        this.topicsState.getTopics('erased', true);
+        break;
+    }
+
     this.filter.set(filter);
   }
 }

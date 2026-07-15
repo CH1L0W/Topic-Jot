@@ -18,8 +18,13 @@ public class TopicController {
     private final TopicService topicService;
 
     @GetMapping()
-    public ResponseEntity<List<TopicDTO>> getAllTopics(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(this.topicService.getTopics(user.getId()));
+    public ResponseEntity<List<TopicDTO>> getAllTopics(
+            @AuthenticationPrincipal User user,
+            @RequestParam(required = false) Boolean favorite,
+            @RequestParam(required = false) Boolean erased,
+            @RequestParam(required = false) Boolean recent
+    ) {
+        return ResponseEntity.ok(this.topicService.getTopics(user.getId(), favorite, recent, erased));
     }
 
     @PostMapping
@@ -32,6 +37,12 @@ public class TopicController {
     public ResponseEntity<Void> updateTopic(@PathVariable Long id, @RequestBody TopicDTO topic, @AuthenticationPrincipal User user) {
         this.topicService.updateTopic(id, topic, user.getId());
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/favorite")
+    public ResponseEntity<Void> toggleFavorite(@RequestBody TopicDTO topic) {
+        this.topicService.toggleFavorite(topic.getId());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     @DeleteMapping("/{id}")

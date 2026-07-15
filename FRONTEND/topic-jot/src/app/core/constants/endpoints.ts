@@ -18,8 +18,8 @@ export const TOPIC_ENDPOINTS = {
 }
 
 export const NOTE_ENDPOINTS = {
-    'addNote': 'note',
-    'getNote': 'note',
-    'updateNote': 'note',
-    'deleteNote': 'note'
+    'addNote': 'notes',
+    'getNotes': 'notes',
+    'updateNote': 'notes',
+    'deleteNote': 'notes'
 }

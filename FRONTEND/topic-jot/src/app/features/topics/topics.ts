@@ -5,6 +5,7 @@ import { SearchBar } from "../../layout/search-bar/search-bar";
 import { TopicStateService } from '../../core/services/topic-state.service';
 import { Topic } from '../../core/models/topic';
 import { DialogStateService } from '../../core/services/dialog-state.service';
+import { NoteStateService } from '../../core/services/note-state.service';
 
 export enum FILTERS {
   all = 'ALL',
@@ -20,8 +21,9 @@ export enum FILTERS {
   styleUrl: './topics.css',
 })
 export class Topics {
-  protected readonly dialogState = inject(DialogStateService); 
+  readonly dialogState = inject(DialogStateService); 
   private readonly topicsState = inject(TopicStateService);
+  private readonly notesState = inject(NoteStateService);
 
   @Output() topicSelected = new EventEmitter<void>();
 
@@ -30,7 +32,7 @@ export class Topics {
   filter = signal<FILTERS>(FILTERS.all);
 
   readonly topics = computed(() => this.topicsState.topics())
-
+  
   setTopicsFilter(filter: FILTERS) {
     switch (filter) {
       case FILTERS.all:
@@ -48,5 +50,10 @@ export class Topics {
     }
 
     this.filter.set(filter);
+  }
+
+  searchNotes(topicId: string) {
+    this.notesState.searchNotes(topicId);
+    this.topicSelected.emit();
   }
 }

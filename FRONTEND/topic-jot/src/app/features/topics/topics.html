@@ -29,7 +29,7 @@
     <div class="flex flex-wrap justify-center gap-4">
 
         @for (item of topics(); track $index) {
-        <app-topic-card [topic]="item" (click)="topicSelected.emit()">
+        <app-topic-card [topic]="item" (click)="searchNotes(item.id!)">
         </app-topic-card>
         }
 

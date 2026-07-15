@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { NoteCard } from "../../shared/note-card/note-card";
 import { LucideAngularModule } from "lucide-angular";
 import { SearchBar } from "../../layout/search-bar/search-bar";
+import { NoteStateService } from '../../core/services/note-state.service';
 
 @Component({
   selector: 'app-notes',
@@ -10,5 +11,7 @@ import { SearchBar } from "../../layout/search-bar/search-bar";
   styleUrl: './notes.css',
 })
 export class Notes {
-  items = Array(2);
+  private readonly notesState = inject(NoteStateService);
+
+  readonly notes = computed(() => this.notesState.notes());
 }

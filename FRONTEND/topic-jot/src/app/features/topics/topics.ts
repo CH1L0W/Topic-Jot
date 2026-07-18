@@ -52,7 +52,7 @@ export class Topics {
     this.filter.set(filter);
   }
 
-  searchNotes(topicId: string) {
+  searchNotes(topicId: number) {
     this.notesState.searchNotes(topicId);
     this.topicSelected.emit();
   }

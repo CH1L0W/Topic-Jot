@@ -21,15 +21,15 @@ export class TopicStateService {
     });
   }
 
-  eraseTopic(id: string) {
+  eraseTopic(id: number) {
     this.api.delete<any>(`${TOPIC_ENDPOINTS.deleteTopic}/${id}`).subscribe({
       next: () => this.getTopics(),
       error: (err) => console.error(err),
     });
   }
 
-  toggleFavorite(id: string) {
-    this.api.put<any>(TOPIC_ENDPOINTS.toggleFavorite, {'id': Number (id)}).subscribe({
+  toggleFavorite(id: number) {
+    this.api.put<any>(TOPIC_ENDPOINTS.toggleFavorite, {'id': id}).subscribe({
       next: () => this.getTopics(),
       error: (err) => console.error(err),
     });

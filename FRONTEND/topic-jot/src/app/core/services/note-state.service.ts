@@ -11,7 +11,7 @@ export class NoteStateService {
   private readonly api = inject(ApiService);
   notes = signal<Notes[]>([]);
 
-  searchNotes(topicId: string) {
+  searchNotes(topicId: number) {
     this.api.get<Notes[]>(`${NOTE_ENDPOINTS.getNotes}/${topicId}`).subscribe({
       next: (res) => {
         this.notes.set(res);
@@ -19,5 +19,8 @@ export class NoteStateService {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  toggleFavorite(id: number) {
   }
 }

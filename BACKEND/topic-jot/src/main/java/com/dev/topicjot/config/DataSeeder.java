@@ -1,7 +1,9 @@
 package com.dev.topicjot.config;
 
+import com.dev.topicjot.models.Note;
 import com.dev.topicjot.models.Topic;
 import com.dev.topicjot.models.User;
+import com.dev.topicjot.repositories.NoteRepository;
 import com.dev.topicjot.repositories.TopicRepository;
 import com.dev.topicjot.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +16,11 @@ import java.time.Instant;
 @Configuration
 public class DataSeeder {
     @Bean
-    public CommandLineRunner commandLineRunner(UserRepository userRepository, PasswordEncoder passwordEncoder, TopicRepository topicRepository) {
+    public CommandLineRunner commandLineRunner(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            TopicRepository topicRepository,
+            NoteRepository noteRepository) {
         return args -> {
             User user = new User();
             user.setName("Mario");
@@ -32,6 +38,14 @@ public class DataSeeder {
             topic.setErased(false);
             topic.setLastTimeOpened(Instant.now());
             topicRepository.save(topic);
+
+            Note note = new Note();
+            note.setTitle("Note test");
+            note.setContent("Note test");
+            note.setFavorite(false);
+            note.setErased(false);
+            note.setTopic(topic);
+            noteRepository.save(note);
         };
     }
 }

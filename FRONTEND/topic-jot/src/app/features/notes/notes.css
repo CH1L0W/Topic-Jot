@@ -23,11 +23,11 @@
 }
 
 .dropdown-arrow {
-    @apply !border-text w-fit bg-white border rounded shadow-md z-10 absolute;
+    @apply !border-text w-fit bg-white border rounded shadow-md z-20 absolute;
 
     ul {
         @apply py-2;
-        
+
         li {
             @apply whitespace-nowrap px-2 hover:bg-gray-100 cursor-pointer;
         }
@@ -39,7 +39,7 @@
     content: '';
     position: absolute;
     width: 0;
-    height: 0;    
+    height: 0;
 }
 
 .dropdown-arrow::before {
@@ -58,4 +58,12 @@
 
     top: -5.5px;
     right: 10px;
+}
+
+.new-note-card {
+    @apply flex flex-col gap-4;
+
+    * {
+        @apply focus:outline-none focus:placeholder-transparent focus-visible:outline-2 focus-visible:outline-offset-2;
+    }
 }

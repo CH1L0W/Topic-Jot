@@ -44,7 +44,6 @@ export class App {
   }
 
   saveTopic(topic: Topic) {
-    console.log(topic);
     if (topic.id) {
       this.api.put<any>(`${TOPIC_ENDPOINTS.updateTopic}/${topic.id}`, topic).subscribe({
         next: () => {

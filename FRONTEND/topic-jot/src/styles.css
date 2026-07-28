@@ -58,3 +58,11 @@
   --color-toolbar-bg: #F0E3D4;
   --color-form-element-bg: #F0E3D4;
 }
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+  border-top: 1px solid #ccc;
+}
+
+.ql-container.ql-snow.ql-disabled {
+  border: 0;
+}

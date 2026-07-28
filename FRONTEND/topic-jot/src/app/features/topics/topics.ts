@@ -53,7 +53,11 @@ export class Topics {
   }
 
   searchNotes(topicId: number) {
-    this.notesState.searchNotes(topicId);
+    this.topicsState.selectedTopic.set(
+      this.topicsState.topics().find(topic => topic.id === topicId) || null
+    );
+
+    this.notesState.searchNotes();
     this.topicSelected.emit();
   }
 }

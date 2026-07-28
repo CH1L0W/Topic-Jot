@@ -13,7 +13,6 @@ import java.time.Instant;
 public class NoteDTO {
     private Long id;
     private Long topicId;
-    private String title;
     private String content;
     private boolean favorite;
     private boolean erased;
@@ -25,7 +24,6 @@ public class NoteDTO {
 
     public NoteDTO(Note note) {
         this.id = note.getId();
-        this.title = note.getTitle();
         this.content = note.getContent();
         this.favorite = note.isFavorite();
         this.erased = note.isErased();

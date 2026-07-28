@@ -40,9 +40,8 @@ public class DataSeeder {
             topicRepository.save(topic);
 
             Note note = new Note();
-            note.setTitle("Note test");
-            note.setContent("Note test");
-            note.setFavorite(false);
+            note.setContent("{\"ops\":[{\"insert\":\"Probando notas\\n\"}]}");
+            note.setFavorite(true);
             note.setErased(false);
             note.setTopic(topic);
             noteRepository.save(note);

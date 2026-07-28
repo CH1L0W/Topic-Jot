@@ -39,9 +39,9 @@ public class TopicController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/favorite")
-    public ResponseEntity<Void> toggleFavorite(@RequestBody TopicDTO topic) {
-        this.topicService.toggleFavorite(topic.getId());
+    @PutMapping("/favorite/{id}")
+    public ResponseEntity<Void> toggleFavorite(@PathVariable Long id) {
+        this.topicService.toggleFavorite(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 

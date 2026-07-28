@@ -15,5 +15,4 @@ public class TopicSpecifications {
     public static Specification<Topic> hasFavorite(Boolean favorite) {
         return (root, query, cb) -> Boolean.TRUE.equals(favorite) ? cb.isTrue(root.get("favorite")) : null;
     }
-
 }

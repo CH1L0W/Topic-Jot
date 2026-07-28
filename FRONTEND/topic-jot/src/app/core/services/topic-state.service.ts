@@ -10,6 +10,7 @@ import { HttpParams } from '@angular/common/http';
 export class TopicStateService {
   private readonly api = inject(ApiService);
   topics = signal<Topic[]>([]);
+  selectedTopic = signal<Topic | null>(null);
 
   getTopics(filterName?: string, value?: string | number | boolean) {
     this.api.get<Topic[]>(

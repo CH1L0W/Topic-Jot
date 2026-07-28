@@ -1,5 +1,6 @@
-export interface Notes {
+export interface Note {
     id: number;
+    topicId: number;
     title: string;
     content: string;
     favorite: boolean;

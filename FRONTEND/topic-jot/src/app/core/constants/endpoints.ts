@@ -21,5 +21,6 @@ export const NOTE_ENDPOINTS = {
     'addNote': 'notes',
     'getNotes': 'notes',
     'updateNote': 'notes',
-    'deleteNote': 'notes'
+    'deleteNote': 'notes',
+    'toggleFavorite': 'notes/favorite'
 }

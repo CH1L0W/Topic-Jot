@@ -5,7 +5,7 @@
         <span>|</span>
 
         <div class="relative filters" appClickOutside (appClickOutside)="hideFilters.set(true)">
-            <button class="flex items-center gap-1" (click)="toggleFilters()">
+            <button class="flex items-center gap-1" (click)="toggle(hideFilters)">
                 <lucide-icon name="funnel" size="20"></lucide-icon>
                 <span>Filters</span>
                 <lucide-icon name="chevron-down" size="20"></lucide-icon>
@@ -13,12 +13,12 @@
 
             <div class="dropdown-arrow top-9 right-0" [hidden]="hideFilters()">
                 <ul>
-                    <li (click)="toggleFilter('favorite', !filters()['favorite']); $event.stopPropagation()">
+                    <li (click)="toggleFilter('favorite', !filters()['favorite']);">
                         <input type="checkbox" class="mr-2" [(ngModel)]="filters()['favorite']" />
                         Favorite
                     </li>
 
-                    <li (click)="toggleFilter('erased', !filters()['erased']); $event.stopPropagation()">
+                    <li (click)="toggleFilter('erased', !filters()['erased'])">
                         <input type="checkbox" class="mr-2" [(ngModel)]="filters()['erased']" />
                         Erased
                     </li>
@@ -31,13 +31,13 @@
         <span># Notes</span>
         <span>|</span>
         <div class="relative options" appClickOutside (appClickOutside)="hideOptions.set(true)">
-            <button (click)="toggleOptions()">
+            <button (click)="toggle(hideOptions)">
                 <lucide-icon name="ellipsis-vertical" size="20"></lucide-icon>
             </button>
 
-            <div class="dropdown-arrow top-9 -right-1" [hidden]="hideOptions()" (click)="$event.stopPropagation()">
-                <ul>
-                    <li>Add Note</li>
+            <div class="dropdown-arrow top-9 -right-1" [hidden]="hideOptions()">
+                <ul (click)="hideOptions.set(true)">
+                    <li (click)="showNewNoteCard.set(true)">Add Note</li>
                 </ul>
             </div>
         </div>
@@ -45,33 +45,55 @@
 </div>
 
 <div class="flex flex-col gap-4">
-    @for (note of notes(); track $index) {
+    @if(showNewNoteCard()) {
+    <app-note-card appClickOutside (appClickOutside)="showNewNoteCard.set(false)">
+        <ng-container
+            *ngTemplateOutlet="noteForm; context: { onCancel: cancel }"></ng-container>
+    </app-note-card>
+    }
+
+    @for (note of notes(); track note.id) {
+    @if (editingNoteId() === note.id) {
+    <app-note-card appClickOutside (appClickOutside)="editingNoteId.set(null)">
+        <ng-container
+            *ngTemplateOutlet="noteForm; context: { note: note, onCancel: cancel }"></ng-container>
+    </app-note-card>
+    } @else {
     <app-note-card class="relative" title="{{note.title}}">
-        <div appClickOutside (appClickOutside)="hideNoteOptions.set(true)" class="absolute top-2 right-1.5 ">
-            <button class="text-xl" (click)="toggleNoteOptions()">
+        <div appClickOutside (appClickOutside)="closeNoteOptionsIfOpen(note.id!)" class="absolute top-2 right-1.5 z-10">
+            <button class="text-xl" (click)="toggleNoteOptions(note.id!)">
                 <lucide-icon name="ellipsis-vertical" />
             </button>
-            <div class="dropdown-arrow top-8 -right-1" [hidden]="hideNoteOptions()" (click)="$event.stopPropagation()">
-                <ul>
-                    <li>Add Note</li>
+            <div class="dropdown-arrow top-8 -right-1" [hidden]="hideNoteOptions() !== note.id">
+                <ul (click)="hideNoteOptions.set(null)">
+                    <li (click)="editingNoteId.set(note.id)">Edit</li>
+                    <li (click)="delete(note.id)">Delete</li>
                 </ul>
             </div>
         </div>
 
-        <p class="text-justify">
-            {{note.content}}
-        </p>
+        <div appQuillEditor [content]="note.content" [readOnly]="true"></div>
 
-        <div footer class="flex justify-between items-center">
+        <div class="flex justify-between items-center">
             <div class="flex gap-4">
                 <div class="flex items-center gap-1"><lucide-icon name="clock" size="20" /> {{note.updatedAt}}</div>
             </div>
 
             <button>
                 <lucide-icon name="bookmark" size="20" [class]="note.favorite ? 'fill-current' : ''"
-                    (click)="toggleFavorite(note.id!); $event.stopPropagation()" />
+                    (click)="toggleFavorite(note.id!)" />
             </button>
         </div>
     </app-note-card>
     }
+    }
 </div>
+
+<ng-template class="new-note-card" #noteForm let-note="note" let-onCancel="onCancel">
+    <div appQuillEditor [content]="note?.content" (contentChange)="formContent.set($event)"></div>
+
+    <div footer class="flex justify-end gap-2">
+        <button class="hover:bg-gray-100 cursor-pointer" (click)="onCancel()">Cancel</button>
+        <button class="hover:bg-gray-100 cursor-pointer" (click)="save(note)">Save</button>
+    </div>
+</ng-template>

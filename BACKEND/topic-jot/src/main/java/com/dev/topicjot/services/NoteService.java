@@ -2,9 +2,14 @@ package com.dev.topicjot.services;
 
 import com.dev.topicjot.dto.NoteDTO;
 import com.dev.topicjot.models.Note;
+import com.dev.topicjot.models.Topic;
 import com.dev.topicjot.repositories.NoteRepository;
 import com.dev.topicjot.repositories.TopicRepository;
+import com.dev.topicjot.repositories.specifications.NoteSpecifications;
+import com.dev.topicjot.repositories.specifications.TopicSpecifications;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +20,23 @@ public class NoteService {
     private final NoteRepository noteRepository;
     private final TopicRepository topicRepository;
 
-    public List<NoteDTO> getNotesByTopic(Long topicId) {
-        return this.noteRepository.findByTopicId(topicId).stream().map(NoteDTO::new).toList();
+    public List<NoteDTO> getNotesByTopic(Long topicId, Boolean favorite, Boolean erased) {
+        Sort sort = Sort.by(
+                Sort.Order.desc("createdAt")
+        );
+
+        Specification<Note> specs = Specification
+                .where(NoteSpecifications.hasTopicId(topicId))
+                .and(NoteSpecifications.hasFavorite(favorite));
+
+        if(Boolean.TRUE.equals(erased)){
+            specs = Specification
+                    .where(NoteSpecifications.hasTopicId(topicId))
+                    .and(NoteSpecifications.hasErased());
+        }
+
+        List<Note> notes = this.noteRepository.findAll(specs, sort);
+        return notes.stream().map(NoteDTO::new).toList();
     }
 
     public void addNote(NoteDTO noteDTO) {
@@ -28,12 +48,18 @@ public class NoteService {
     public void updateNote(Long id, NoteDTO noteDTO) {
         this.noteRepository.findById(id).ifPresent(existingNote -> {
             existingNote.setContent(noteDTO.getContent());
-            existingNote.setTopic(topicRepository.findById(noteDTO.getTopicId()).orElseThrow(() -> new RuntimeException("Topic Not Found")));
             this.noteRepository.save(existingNote);
         });
     }
 
     public void deleteNote(Long id) {
         this.noteRepository.deleteById(id);
+    }
+
+    public void toggleFavorite(Long id) {
+        this.noteRepository.findById(id).ifPresent(existingNote -> {
+            existingNote.setFavorite(!existingNote.isFavorite());
+            this.noteRepository.save(existingNote);
+        });
     }
 }

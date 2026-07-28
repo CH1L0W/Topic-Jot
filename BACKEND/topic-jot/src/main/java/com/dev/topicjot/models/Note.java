@@ -20,7 +20,6 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
     private String content;
     private boolean favorite;
     private boolean erased;
@@ -40,5 +39,7 @@ public class Note {
 
     public Note(NoteDTO noteDTO) {
         this.content = noteDTO.getContent();
+        this.favorite = noteDTO.isFavorite();
+        this.erased = noteDTO.isErased();
     }
 }

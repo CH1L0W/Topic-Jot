@@ -1,36 +1,37 @@
 package com.dev.topicjot.dto;
 
+import com.dev.topicjot.dto.validation.OnCreate;
 import com.dev.topicjot.models.Note;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.time.Instant;
 
-@Data
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class NoteDTO {
-    private Long id;
-    private Long topicId;
-    private String content;
-    private boolean favorite;
-    private boolean erased;
-
-    private Instant createdAt;
-    private Instant updatedAt;
-    private String createdBy;
-    private String updatedBy;
-
+public record NoteDTO(
+        Long id,
+        @NotNull(groups = OnCreate.class) @Positive(groups = OnCreate.class) Long topicId,
+        @NotBlank String content,
+        boolean favorite,
+        boolean erased,
+        Instant createdAt,
+        Instant updatedAt,
+        String createdBy,
+        String updatedBy
+) {
     public NoteDTO(Note note) {
-        this.id = note.getId();
-        this.content = note.getContent();
-        this.favorite = note.isFavorite();
-        this.erased = note.isErased();
-
-        this.createdAt = note.getCreatedAt();
-        this.updatedAt = note.getUpdatedAt();
-        this.createdBy = note.getCreatedBy();
-        this.updatedBy = note.getUpdatedBy();
+        this(
+                note.getId(),
+                null,
+                note.getContent(),
+                note.isFavorite(),
+                note.isErased(),
+                note.getCreatedAt(),
+                note.getUpdatedAt(),
+                note.getCreatedBy(),
+                note.getUpdatedBy()
+        );
     }
 }

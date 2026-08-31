@@ -1,6 +1,7 @@
 package com.dev.topicjot.services;
 
 import com.dev.topicjot.dto.NoteDTO;
+import com.dev.topicjot.exceptions.ResourceNotFoundException;
 import com.dev.topicjot.models.Note;
 import com.dev.topicjot.models.Topic;
 import com.dev.topicjot.repositories.NoteRepository;
@@ -36,20 +37,24 @@ public class NoteService {
         }
 
         List<Note> notes = this.noteRepository.findAll(specs, sort);
+
+        if(notes.isEmpty()){
+            throw new ResourceNotFoundException("No notes found");
+        }
+
         return notes.stream().map(NoteDTO::new).toList();
     }
 
     public void addNote(NoteDTO noteDTO) {
         Note note = new Note(noteDTO);
-        note.setTopic(topicRepository.findById(noteDTO.getTopicId()).orElseThrow(() -> new RuntimeException("Topic Not Found")));
+        note.setTopic(topicRepository.findById(noteDTO.topicId()).orElseThrow(() -> new ResourceNotFoundException("Topic Not Found")));
         this.noteRepository.save(note);
     }
 
     public void updateNote(Long id, NoteDTO noteDTO) {
-        this.noteRepository.findById(id).ifPresent(existingNote -> {
-            existingNote.setContent(noteDTO.getContent());
-            this.noteRepository.save(existingNote);
-        });
+        Note note =  this.noteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Note Not Found"));
+        note.setContent(noteDTO.content());
+        this.noteRepository.save(note);
     }
 
     public void deleteNote(Long id) {
@@ -57,9 +62,8 @@ public class NoteService {
     }
 
     public void toggleFavorite(Long id) {
-        this.noteRepository.findById(id).ifPresent(existingNote -> {
-            existingNote.setFavorite(!existingNote.isFavorite());
-            this.noteRepository.save(existingNote);
-        });
+        Note note =  this.noteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Note Not Found"));
+        note.setFavorite(!note.isFavorite());
+        this.noteRepository.save(note);
     }
 }

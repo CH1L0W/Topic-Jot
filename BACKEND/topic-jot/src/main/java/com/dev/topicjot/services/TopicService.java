@@ -50,11 +50,11 @@ public class TopicService {
 
     public void updateTopic(Long id, TopicDTO topicDTO, Long userId) {
         this.topicRepository.findById(id).ifPresent(existingTopic -> {
-            existingTopic.setTitle(topicDTO.getTitle());
-            existingTopic.setDescription(topicDTO.getDescription());
-            existingTopic.setCardColor(topicDTO.getCardColor());
-            existingTopic.setIcon(topicDTO.getIcon());
-            existingTopic.setFavorite(topicDTO.isFavorite());
+            existingTopic.setTitle(topicDTO.title());
+            existingTopic.setDescription(topicDTO.description());
+            existingTopic.setCardColor(topicDTO.cardColor());
+            existingTopic.setIcon(topicDTO.icon());
+            existingTopic.setFavorite(topicDTO.favorite());
             existingTopic.setUser(userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found")));
             this.topicRepository.save(existingTopic);
         });

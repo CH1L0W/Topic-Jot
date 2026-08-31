@@ -38,8 +38,8 @@ public class Note {
     private Topic topic;
 
     public Note(NoteDTO noteDTO) {
-        this.content = noteDTO.getContent();
-        this.favorite = noteDTO.isFavorite();
-        this.erased = noteDTO.isErased();
+        this.content = noteDTO.content();
+        this.favorite = noteDTO.favorite();
+        this.erased = noteDTO.erased();
     }
 }

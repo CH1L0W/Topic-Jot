@@ -1,9 +1,10 @@
 package com.dev.topicjot.controllers;
 
-import com.dev.topicjot.dto.UserDTO;
+import com.dev.topicjot.dto.LoginDTO;
 import com.dev.topicjot.models.User;
 import com.dev.topicjot.services.JwtService;
 import com.dev.topicjot.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +22,8 @@ public class LoginController {
     private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody UserDTO userDTO) {
-        User user = userService.getByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
+    public ResponseEntity<Map<String, String>> login(@RequestBody @Valid LoginDTO loginRequest) {
+        User user = userService.getByEmailAndPassword(loginRequest.email(), loginRequest.password());
         if (user != null) {
             return ResponseEntity.ok(Map.of("token", jwtService.generateToken(user.getEmail())));
         }

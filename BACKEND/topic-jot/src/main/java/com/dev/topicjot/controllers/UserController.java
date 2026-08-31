@@ -2,37 +2,44 @@ package com.dev.topicjot.controllers;
 
 import com.dev.topicjot.dto.UserDTO;
 import com.dev.topicjot.services.UserService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
+@Validated
 public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
-        return this.userService.getUser(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO getUser(@PathVariable @Positive long id) {
+        return this.userService.getUser(id);
     }
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@RequestBody UserDTO user) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createUser(@RequestBody @Valid UserDTO user) {
         this.userService.addUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserDTO user) {
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser(@PathVariable @Positive long id, @RequestBody @Valid UserDTO user) {
         this.userService.updateUser(id, user);
-        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable @Positive long id) {
         this.userService.deleteUser(id);
-        return ResponseEntity.ok().build();
     }
 }

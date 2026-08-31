@@ -46,12 +46,12 @@ public class Topic {
     private List<Note> notes;
 
     public Topic(TopicDTO topicDTO) {
-        this.title = topicDTO.getTitle();
-        this.description = topicDTO.getDescription();
-        this.cardColor = topicDTO.getCardColor();
-        this.icon = topicDTO.getIcon();
-        this.favorite = topicDTO.isFavorite();
-        this.erased = topicDTO.isErased();
+        this.title = topicDTO.title();
+        this.description = topicDTO.description();
+        this.cardColor = topicDTO.cardColor();
+        this.icon = topicDTO.icon();
+        this.favorite = topicDTO.favorite();
+        this.erased = topicDTO.erased();
         this.lastTimeOpened = Instant.now();
     }
 }

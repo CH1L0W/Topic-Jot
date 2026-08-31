@@ -2,44 +2,41 @@ package com.dev.topicjot.dto;
 
 import com.dev.topicjot.models.Topic;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.Instant;
 
-@Data
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TopicDTO {
-    private Long id;
-    private String title;
-    private String description;
-    private String cardColor;
-    private String icon;
-    private boolean favorite;
-    private boolean erased;
-    private Instant lastTimeOpened;
-    private int notes;
-
-    private Instant createdAt;
-    private Instant updatedAt;
-    private String createdBy;
-    private String updatedBy;
-
+public record TopicDTO(
+        Long id,
+        @NotBlank String title,
+        @NotBlank String description,
+        @NotBlank String cardColor,
+        @NotBlank String icon,
+        boolean favorite,
+        boolean erased,
+        Instant lastTimeOpened,
+        int notes,
+        Instant createdAt,
+        Instant updatedAt,
+        String createdBy,
+        String updatedBy
+) {
     public TopicDTO(Topic topic) {
-        this.id = topic.getId();
-        this.title = topic.getTitle();
-        this.description = topic.getDescription();
-        this.cardColor = topic.getCardColor();
-        this.icon = topic.getIcon();
-        this.favorite = topic.isFavorite();
-        this.erased = topic.isErased();
-        this.lastTimeOpened = topic.getLastTimeOpened();
-        this.notes = topic.getNotes().size();
-
-        this.createdAt = topic.getCreatedAt();
-        this.updatedAt = topic.getUpdatedAt();
-        this.createdBy = topic.getCreatedBy();
-        this.updatedBy = topic.getUpdatedBy();
+        this(
+                topic.getId(),
+                topic.getTitle(),
+                topic.getDescription(),
+                topic.getCardColor(),
+                topic.getIcon(),
+                topic.isFavorite(),
+                topic.isErased(),
+                topic.getLastTimeOpened(),
+                topic.getNotes().size(),
+                topic.getCreatedAt(),
+                topic.getUpdatedAt(),
+                topic.getCreatedBy(),
+                topic.getUpdatedBy()
+        );
     }
 }

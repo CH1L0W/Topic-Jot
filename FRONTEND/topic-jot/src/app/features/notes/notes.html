@@ -47,16 +47,14 @@
 <div class="flex flex-col gap-4">
     @if(showNewNoteCard()) {
     <app-note-card appClickOutside (appClickOutside)="showNewNoteCard.set(false)">
-        <ng-container
-            *ngTemplateOutlet="noteForm; context: { onCancel: cancel }"></ng-container>
+        <ng-container></ng-container>
     </app-note-card>
     }
 
     @for (note of notes(); track note.id) {
     @if (editingNoteId() === note.id) {
     <app-note-card appClickOutside (appClickOutside)="editingNoteId.set(null)">
-        <ng-container
-            *ngTemplateOutlet="noteForm; context: { note: note, onCancel: cancel }"></ng-container>
+        <ng-container></ng-container>
     </app-note-card>
     } @else {
     <app-note-card class="relative" title="{{note.title}}">
@@ -67,12 +65,12 @@
             <div class="dropdown-arrow top-8 -right-1" [hidden]="hideNoteOptions() !== note.id">
                 <ul (click)="hideNoteOptions.set(null)">
                     <li (click)="editingNoteId.set(note.id)">Edit</li>
-                    <li (click)="delete(note.id)">Delete</li>
+                    <li>Delete</li>
                 </ul>
             </div>
         </div>
 
-        <div appQuillEditor [content]="note.content" [readOnly]="true"></div>
+        {{ note.content }}
 
         <div class="flex justify-between items-center">
             <div class="flex gap-4">
@@ -80,8 +78,7 @@
             </div>
 
             <button>
-                <lucide-icon name="bookmark" size="20" [class]="note.favorite ? 'fill-current' : ''"
-                    (click)="toggleFavorite(note.id!)" />
+                <lucide-icon name="bookmark" size="20" [class]="note.favorite ? 'fill-current' : ''" />
             </button>
         </div>
     </app-note-card>
@@ -90,10 +87,8 @@
 </div>
 
 <ng-template class="new-note-card" #noteForm let-note="note" let-onCancel="onCancel">
-    <div appQuillEditor [content]="note?.content" (contentChange)="formContent.set($event)"></div>
-
     <div footer class="flex justify-end gap-2">
         <button class="hover:bg-gray-100 cursor-pointer" (click)="onCancel()">Cancel</button>
-        <button class="hover:bg-gray-100 cursor-pointer" (click)="save(note)">Save</button>
+        <button class="hover:bg-gray-100 cursor-pointer">Save</button>
     </div>
 </ng-template>
